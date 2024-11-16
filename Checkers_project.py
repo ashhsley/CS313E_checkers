@@ -1,5 +1,5 @@
 class Piece:
-    def __init__(self, color=None, is_king=False, is_in=True, position=(0, 0)):
+    def __init__(self, color=None, is_king=False, is_in=True, position=(0, 0)): # I guess the main difference is that I used a tuple instead of a list for the position
         self.color = color
         self.isKing = is_king
         self.position = position
