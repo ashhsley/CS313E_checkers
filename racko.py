@@ -1,16 +1,3 @@
-# File: racko.py
-# Description: A program that simulates the card and number game
-# Rack-O. Players use the keyboard and take turns.
-# Assignment Number: 9
-#
-# Name: Ali Pouamou
-# EID:  ap63783
-# Email: ali.chimoun@utexas.edu
-# Grader: Risha
-#
-# On my honor, Ali Pouamou, this programming assignment is my own work
-# and I have not provided this code to any other student.
-
 import random
 
 
@@ -38,9 +25,6 @@ def main():
         print('Player 1 wins!')
     else:
         print('Player 2 wins!')
-
-    # CS303e students. Complete the main method to play
-    # one complete game of Rack-O using the specified functions.
 
 
 def prep_game():
