@@ -37,4 +37,3 @@ MAIN
 - init board
 - prompt for input from player black/white
 - loop til win
-

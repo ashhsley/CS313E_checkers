@@ -12,7 +12,7 @@ def main():
     player_2_rack = get_rack(deck, rack_size)
     discard = [deck.pop(0)]
 
-    while not is_sorted(player_1_rack) and not is_sorted(player_2_rack):
+    while not sorted(player_1_rack) and not sorted(player_2_rack):
         print(f"Player {player % 2 + 1}'s turn.")
         if player % 2 == 0:
             take_turn(deck, discard, player_1_rack)
@@ -21,7 +21,7 @@ def main():
         state_deck(deck, discard)
         player += 1
 
-    if is_sorted(player_1_rack):
+    if sorted(player_1_rack):
         print('Player 1 wins!')
     else:
         print('Player 2 wins!')
@@ -108,28 +108,19 @@ def place_card(player_rack, new_card, discard):
     replace = int(input(f'Enter the card number to '
                         f'replace with the {new_card}: '))
 
-    while not is_in_rack(player_rack, replace):
+    while replace not in player_rack:
         print(f'{replace} is not in your rack.')
         replace = int(input(f'Enter the card number to '
                             f'replace with the {new_card}: '))
 
-    i = index_card(player_rack, replace)
+    i = player_rack.index(replace)
     discard.insert(0, player_rack[i])
     player_rack[i] = new_card
 
 
-def is_sorted(rack):
-    """Return if this rack is sorted in ascending order.
-
-    CS303e assignment limitation:
-    Do not create any new lists in this function.
-    """
-
-    for i in range(len(rack) - 1):
-        if rack[i] > rack[i+1]:
-            return False
-
-    return True
+'''Hi i got rid of the is_sorted method, is_in method, and the get_index method 
+because those have functions built into python! I also changed the main method call. 
+LMK if there r any issues!'''
 
 
 def get_rack(deck, rack_size):
@@ -147,27 +138,6 @@ def get_rack(deck, rack_size):
     return rack
 
 
-def is_in_rack(player_rack, the_card):
-    """Check if a card is the player's rack
-
-    Return True if it is and otherwise False
-    """
-
-    for card in player_rack:
-        if card == the_card:
-            return True
-
-    return False
-
-
-def index_card(player_rack, card):
-    """Returns the index of a target card in a player's rack"""
-
-    for i in range(len(player_rack)):
-        if player_rack[i] == card:
-            return i
-
-
 def state_deck(deck, discard):
     """In the event the deck is empty
 
@@ -181,4 +151,5 @@ def state_deck(deck, discard):
             deck.append(discard.pop(0))
 
 
-main()
+if __name__ == "__main__":
+    main()
