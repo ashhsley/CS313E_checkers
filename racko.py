@@ -18,7 +18,10 @@ def main():
             take_turn(deck, discard, player_1_rack)
         else:
             take_turn(deck, discard, player_2_rack)
-        state_deck(deck, discard)
+        if not len(deck):
+            random.shuffle(discard)
+            while len(discard) > 1:
+                deck.append(discard.pop(0))
         player += 1
 
     if sorted(player_1_rack):
@@ -136,20 +139,6 @@ def get_rack(deck, rack_size):
         rack.append(deck.pop(0))
 
     return rack
-
-
-def state_deck(deck, discard):
-    """In the event the deck is empty
-
-    Shuffle the discard pile and make a new deck of it
-    Otherwise nothing happens
-    """
-
-    if not len(deck):
-        random.shuffle(discard)
-        while len(discard) > 1:
-            deck.append(discard.pop(0))
-
 
 if __name__ == "__main__":
     main()
