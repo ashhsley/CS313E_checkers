@@ -34,28 +34,6 @@ class TreeRack:
         return str(self.rack)
 
 
-def heap_invariant(tree, index):
-    """Takes an object TreeRack as input, as well as a specified index and return
-    True if it has heap property, False otherwise
-    """
-
-    # A Leaf node by itself satisfies the heap property
-    if tree.is_leaf(index):
-        return True
-
-    # We then recursively check is the property holds for the current node and both subtrees
-
-    l = tree.left(index)
-    r = tree.right(index)
-    if (tree.rack[index] <= tree.rack[l] and
-            tree.rack[index] <= tree.rack[r] and
-            heap_invariant(tree, l) and
-            heap_invariant(tree, r)):
-        return True
-
-    return False
-
-
 class Rack:
     """The rack represents the set of cards each of the player has in their possession
     A simple list can fulfill the role of property here since we'll need to access elements
@@ -103,6 +81,28 @@ class Rack:
 
     def __str__(self):
         return str(self.rack)
+
+
+def heap_invariant(tree, index):
+    """Takes an object TreeRack as input, as well as a specified index and return
+    True if it has heap property, False otherwise
+    """
+
+    # A Leaf node by itself satisfies the heap property
+    if tree.is_leaf(index):
+        return True
+
+    # We then recursively check is the property holds for the current node and both subtrees
+
+    l = tree.left(index)
+    r = tree.right(index)
+    if (tree.rack[index] <= tree.rack[l] and
+            tree.rack[index] <= tree.rack[r] and
+            heap_invariant(tree, l) and
+            heap_invariant(tree, r)):
+        return True
+
+    return False
         
 
 def prep_game():
@@ -218,9 +218,8 @@ def main():
     """Play one game of Rack-O."""
     # Get the rack size, create the deck, and deal the initial racks.
     rack_size = prep_game()
-    cards = list(range(1, 61))
-    random.shuffle(cards)
-    deck = deque(cards)
+    deck = deque(list(range(1, 61)))
+    random.shuffle(deck)
     player = 0  # Player 1 corresponds to even numbers and Player 2 to odd ones
     player_1_rack = Rack(get_rack(deck, rack_size))
     player_2_rack = Rack(get_rack(deck, rack_size))
