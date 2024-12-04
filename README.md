@@ -31,7 +31,8 @@ Replace a card at a certain position by a new one
 Checks if a card is indeed present in the rack
 
 ### is_heap()
-To check if our rack is sorted, we will implement an algorithm checking if a tree built off it has min_heap property
+To check if our rack is sorted, we will implement an algorithm checking if a tree built off it has min_heap property.
+A recursive approach is implemented leading to a time complexity as **O(n)**
 
 
 ## <ins>TreeRack</ins> Object
