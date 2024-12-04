@@ -1,10 +1,5 @@
 import random
 from collections import deque
-"""The collections module contains more specialized datatypes than the most common ones
-https://docs.python.org/3/library/collections.html#collections.deque
-
-deque allows for quick and efficient addition as well as extraction of elements at both ends,
-which is perfect to implement a pile of cards"""
 
 
 class TreeRack:
