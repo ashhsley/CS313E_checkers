@@ -1,21 +1,17 @@
-# CS313E_checkers
-a simple checkers game
+# CS313E_Rack-O!!!
+A simple card game with two players
+The goal is to be the first to have a rack with cards that respect heap invariant (https://en.wikipedia.org/wiki/Binary_heap)
+Players both start with racks of equal lengths populated with cards ranging from 1 to 60 dealt from a randomly shuffled deck
 
-class Piece # checkers piece
-
-INIT
-- color (1 or 2)
-- isKing (t/f)
-- (?) position [x, y]
-
-class Board #8x8 board
+class Rack
 
 INIT
-- board [][] <fill out at beginning
-- put all pieces at starting pos
-- turn (0 = black or 1 = white) initially 0
-- black_pieces []
-- white_pieces []
+-rack[] containing the cards currently in hands
+
+class TreeRack
+
+INIT
+-rack
 
 turn()
 -check poss turns
