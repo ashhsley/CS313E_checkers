@@ -2,7 +2,7 @@
 
 A simple card game with two players inspired by the Rack-O game from Milton Bradley (https://en.wikipedia.org/wiki/Rack-O).
 
-The goal is to be the first to have a rack with cards that respect heap invariant (https://en.wikipedia.org/wiki/Binary_heap).
+The goal is to be the first to have a rack with cards that respect minimum heap invariant (https://en.wikipedia.org/wiki/Binary_heap).
 
 Players both start with racks of equal lengths populated with cards ranging from 1 to 60 dealt from a randomly shuffled deck.
 
