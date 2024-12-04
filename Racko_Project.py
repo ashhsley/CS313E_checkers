@@ -1,5 +1,10 @@
 import random
 from collections import deque
+"""The collections module contains more specialized datatypes than the most common ones
+https://docs.python.org/3/library/collections.html#collections.deque
+
+deque allows for quick and efficient addition as well as extraction of elements at both ends,
+which is perfect to implement a pile of cards"""
 
 
 class TreeRack:
@@ -12,7 +17,6 @@ class TreeRack:
         On this implementation the heap list is initialized with a value
         """
         self.rack = rack
-        # self.rack.insert(0, 0)
 
     @property
     def size(self):
@@ -58,11 +62,17 @@ def heap_invariant(tree, index):
 
 
 class Rack:
+    """The rack represents the set of cards each of the player has in their possession
+    A simple list can fulfill the role of property here since we'll need to access elements
+    at various indices
+    """
     def __init__(self, rack):
         self.rack = rack
 
     @property
     def size(self):
+        """Number of cards each player has
+        """
         return len(self.rack)
 
     def is_heap(self):
@@ -72,53 +82,33 @@ class Rack:
         return heap_invariant(t, 0)
 
     def add(self, card):
+        """Add a card to the rack. This method will be used only during the initialization of the game
+        """
         self.rack.append(card)
 
     def get_index(self, card):
+        """Return the position of a specified card in the rack if it is present
+        """
         return self.rack.index(card)
 
     def get_card(self, index):
+        """Return a card at a given index
+        """
         return self.rack[index]
 
     def replace(self,new_card, index):
+        """Replace a card at a certain position by a new one
+        """
         self.rack[index] = new_card
 
     def is_in(self, card):
+        """Checks if a card is indeed present in the rack
+        """
         return card in self.rack
 
     def __str__(self):
         return str(self.rack)
-
-
-def main():
-    """Play one game of Rack-O."""
-    # Get the rack size, create the deck, and deal the initial racks.
-    rack_size = prep_game()
-    cards = list(range(1, 61))
-    random.shuffle(cards)
-    deck = deque(cards)
-    player = 0  # Player 1 corresponds to even numbers and Player 2 to odd ones
-    player_1_rack = Rack(get_rack(deck, rack_size))
-    player_2_rack = Rack(get_rack(deck, rack_size))
-    discard = deque([deck.popleft()])
-
-    while not player_1_rack.is_heap() and not player_2_rack.is_heap():
-        print(f"Player {player % 2 + 1}'s turn.")
-        if player % 2 == 0:
-            take_turn(deck, discard, player_1_rack)
-        else:
-            take_turn(deck, discard, player_2_rack)
-        if not len(deck):
-            random.shuffle(discard)
-            while len(discard) > 1:
-                deck.append(discard.popleft())
-        player += 1
-
-    if player_1_rack.is_heap():
-        print('Player 1 wins!')
-    else:
-        print('Player 2 wins!')
-
+        
 
 def prep_game():
     """Get ready to play 1 game.
@@ -214,11 +204,6 @@ def place_card(player_rack, new_card, discard):
     player_rack.replace(new_card, i)
 
 
-'''Hi i got rid of the is_sorted method, is_in method, and the get_index method 
-because those have functions built into python! I also changed the main method call. 
-LMK if there r any issues!'''
-
-
 def get_rack(deck, rack_size):
     """Deal the top rack_size cards of the deck into a new rack.
 
@@ -232,6 +217,36 @@ def get_rack(deck, rack_size):
         rack.append(deck.popleft())
 
     return rack
+
+
+def main():
+    """Play one game of Rack-O."""
+    # Get the rack size, create the deck, and deal the initial racks.
+    rack_size = prep_game()
+    cards = list(range(1, 61))
+    random.shuffle(cards)
+    deck = deque(cards)
+    player = 0  # Player 1 corresponds to even numbers and Player 2 to odd ones
+    player_1_rack = Rack(get_rack(deck, rack_size))
+    player_2_rack = Rack(get_rack(deck, rack_size))
+    discard = deque([deck.popleft()])
+
+    while not player_1_rack.is_heap() and not player_2_rack.is_heap():
+        print(f"Player {player % 2 + 1}'s turn.")
+        if player % 2 == 0:
+            take_turn(deck, discard, player_1_rack)
+        else:
+            take_turn(deck, discard, player_2_rack)
+        if not len(deck):
+            random.shuffle(discard)
+            while len(discard) > 1:
+                deck.append(discard.popleft())
+        player += 1
+
+    if player_1_rack.is_heap():
+        print('Player 1 wins!')
+    else:
+        print('Player 2 wins!')
 
 
 if __name__ == "__main__":
