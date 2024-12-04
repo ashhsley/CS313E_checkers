@@ -121,9 +121,10 @@ def place_card(player_rack, new_card, discard):
     player_rack[i] = new_card
 
 
-'''Hi i got rid of the is_sorted method, is_in method, and the get_index method 
+'''Hi i got rid of the is_sorted method, is_in method, state_deck and the get_index method 
 because those have functions built into python! I also changed the main method call. 
-LMK if there r any issues!'''
+LMK if there r any issues!
+                                    -- Ashley Yang'''
 
 
 def get_rack(deck, rack_size):
@@ -140,5 +141,46 @@ def get_rack(deck, rack_size):
 
     return rack
 
+
+
 if __name__ == "__main__":
     main()
+
+
+#TODO
+
+class Heap:
+    def __init__(self):
+        self.heap = []
+        self.max = True
+    
+    def insert(self, node_data):
+        self.heap.append(node_data)
+        #parent is index/2
+        #children are 2n (left) and 2n+1 (right)
+    
+    def extract_max(self):
+        if len(self.heap) < 1:
+            return ('heap underflow') #wtf dos this mean
+        max = self.heap[0]
+        self.heap[0] = self.heap[len(self.heap)-1]
+        self.max_heapify(0)
+        return max
+    # O(lg(n))
+
+    def heapsort(self):
+        pass
+    # O(n lg(n))
+    
+    def build_max_heap(self): # generates max heap from unordered array
+        i = len(self.heap)/2
+        while i > 0:
+            self.max_heapify(i)
+            i = i - 1
+
+    # O(n)
+
+    def max_heapify(self, index): #corrects a single violation of the heap property in a heap
+        pass
+    #runs O(lg(n))
+
